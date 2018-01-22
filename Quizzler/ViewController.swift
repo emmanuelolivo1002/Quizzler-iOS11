@@ -52,11 +52,19 @@ class ViewController: UIViewController {
     
 
     func nextQuestion() {
-        if questionNumber < allQuestions.list.count {
+        if questionNumber < 12 {
             questionLabel.text = allQuestions.list[questionNumber].questionText
         } else {
-            print("Quiz is over")
-            questionNumber = 0
+            
+            let alert = UIAlertController(title: "Finished!", message: "Wanna start over?", preferredStyle: .alert)
+            
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (<#UIAlertAction#>) in
+                self.startOver()
+            })
+            
+            alert.addAction(restartAction)
+            
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -73,7 +81,8 @@ class ViewController: UIViewController {
     
     
     func startOver() {
-       
+       questionNumber = 0
+        nextQuestion()
     }
     
 
